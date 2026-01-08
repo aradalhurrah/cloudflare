@@ -1,0 +1,77 @@
+backend:
+  name: github
+  repo: aradalhurrah/cloudflare
+  branch: main
+  base_url: https://alhurrah.pages.dev
+  auth_endpoint: api/auth
+
+# Media configuration for Cloudflare Pages
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "cars_collection"
+    label: "Cars Collection"
+    files:
+      - name: "data"
+        label: "Car Data"
+        file: "content/data.json"
+        fields:
+          - { label: "Last Updated", name: "updatedAt", widget: "datetime", default: "", required: false }
+          - label: "Cars List"
+            name: "cars"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "string", required: true, hint: "Unique identifier (e.g. car-001)" }
+              - { label: "Car Name", name: "carName", widget: "string", required: true }
+              - { label: "Car Owner Name", name: "carOwnerName", widget: "string", required: true }
+              - { label: "VIN", name: "vin", widget: "string", required: true }
+              
+              - { label: "Purchase Date", name: "purchaseDate", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: true }
+              - { label: "Arrival Date", name: "arrivalDate", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: true }
+              - { label: "Purchase Cost", name: "purchaseCost", widget: "number", value_type: "float", required: true }
+
+              - label: "Payment Type"
+                name: "arrivalOfPaymentType"
+                widget: "select"
+                options:
+                  - { label: "1 - Cash (Full)", value: 1 }
+                  - { label: "2 - Two Installments", value: 2 }
+                  - { label: "3 - Three Installments", value: 3 }
+                  - { label: "4 - Four Installments", value: 4 }
+                  - { label: "5 - Five Installments", value: 5 }
+                default: 1
+                required: true
+
+              # Payment 1
+              - { label: "Payment 1 Amount", name: "arrivalPayment1Amount", widget: "number", value_type: "float", required: true }
+              - { label: "Payment 1 Date", name: "arrivalPayment1Date", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: true }
+
+              # Payment 2
+              - { label: "Payment 2 Amount", name: "arrivalPayment2Amount", widget: "number", value_type: "float", required: false }
+              - { label: "Payment 2 Date", name: "arrivalPayment2Date", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: false }
+
+              # Payment 3
+              - { label: "Payment 3 Amount", name: "arrivalPayment3Amount", widget: "number", value_type: "float", required: false }
+              - { label: "Payment 3 Date", name: "arrivalPayment3Date", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: false }
+
+              # Payment 4
+              - { label: "Payment 4 Amount", name: "arrivalPayment4Amount", widget: "number", value_type: "float", required: false }
+              - { label: "Payment 4 Date", name: "arrivalPayment4Date", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: false }
+
+              # Payment 5
+              - { label: "Payment 5 Amount", name: "arrivalPayment5Amount", widget: "number", value_type: "float", required: false }
+              - { label: "Payment 5 Date", name: "arrivalPayment5Date", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: false }
+
+              - { label: "Shipping Cost", name: "shippingCost", widget: "number", value_type: "float", required: true }
+              - { label: "Shipping Cost Payment Date", name: "shippingCostPaymentDate", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: true }
+              
+              - { label: "Njoom Shipping Cost", name: "njoomShippingCost", widget: "number", value_type: "float", required: false }
+              - { label: "Car Total Cost", name: "carTotalCost", widget: "number", value_type: "float", required: false }
+
+              - { label: "Total Cost of Shipping", name: "totalCostOfShipping", widget: "number", value_type: "float", required: true }
+              - { label: "Left Over and Profit", name: "leftOverAndProfit", widget: "profit_calc", required: true }
+              
+              - { label: "Signature", name: "signature", widget: "image", required: false }
+
+              - { label: "Notes", name: "notes", widget: "text", required: false }
