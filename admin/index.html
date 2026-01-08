@@ -20,6 +20,31 @@
   <body>
     <!-- Include the script that builds the page and powers Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+    
+    <!-- Cloudflare Pages GitHub OAuth Setup -->
+    <script>
+      // ==========================================
+      // 0. GITHUB OAUTH CONFIGURATION
+      // ==========================================
+      
+      // Placeholders for Client ID and Secret.
+      // NOTE: For the secure Authorization Code flow (recommended), 
+      // the Client Secret should NEVER be exposed in the frontend. 
+      // It should be stored in Cloudflare Pages Environment Variables and accessed via a Backend Function (/api/auth).
+      
+      // However, if you are using a flow that requires client-side configuration:
+      const GITHUB_CLIENT_ID = window.GITHUB_CLIENT_ID || "Ov23liSOzAucLFAp8w8j";
+      
+      // WARNING: Putting the secret here exposes it to the public. 
+      // Only do this if you understand the risks or are using a specific client-side flow.
+      // ideally, this is handled by your Cloudflare Function.
+      // const GITHUB_CLIENT_SECRET = "YOUR_GITHUB_CLIENT_SECRET_HERE"; 
+
+      // If you need to manually initialize the CMS to inject these values (e.g. for Implicit flow),
+      // you would set window.CMS_MANUAL_INIT = true; here and call CMS.init() yourself.
+      // For now, we rely on admin/config.yml which points to /api/auth.
+    </script>
+
     <script>
       // ==========================================
       // 1. PROFIT CALCULATION WIDGET (Read-Only)
