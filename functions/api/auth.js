@@ -1,30 +1,29 @@
-export async function onRequestGet(context) {
+// functions/api/auth.js
+export async function onRequest(context) {
   const { request, env } = context;
-  const url = new URL(request.url);
-  
-  // 1. Get Environment Variables
-  const client_id = env.GITHUB_CLIENT_ID;
-  
-  if (!client_id) {
+  const clientId = env.GITHUB_CLIENT_ID;
+
+  if (!clientId) {
     return new Response('GITHUB_CLIENT_ID not configured', { status: 500 });
   }
 
-  // 2. Construct the Redirect URI
-  // Dynamic based on the current request origin (e.g. https://your-site.pages.dev)
-  // Appends /api/callback
-  const redirect_uri = `${url.origin}/api/callback`;
-  
-  // 3. Construct GitHub OAuth URL
-  const params = new URLSearchParams({
-    client_id,
-    scope: 'repo', // Decap CMS needs repo scope
-    redirect_uri,
-    // state: ... // Recommended for security but optional for basic setup
-  });
-  
-  const githubAuthUrl = `https://github.com/login/oauth/authorize?${params.toString()}`;
+  try {
+    const url = new URL(request.url);
 
-  // 4. Redirect the user
-  return Response.redirect(githubAuthUrl, 302);
+    // This will be the URL GitHub redirects back to after auth:
+    const redirectUri = `${url.origin}/api/callback`;
+
+    const githubAuthUrl = new URL('https://github.com/login/oauth/authorize');
+    githubAuthUrl.searchParams.set('client_id', clientId);
+    githubAuthUrl.searchParams.set('redirect_uri', redirectUri);
+    githubAuthUrl.searchParams.set('scope', 'repo user'); // or just 'repo' if public only
+    githubAuthUrl.searchParams.set(
+      'state',
+      crypto.getRandomValues(new Uint8Array(12)).join('')
+    );
+
+    return Response.redirect(githubAuthUrl.toString(), 302);
+  } catch (err) {
+    return new Response(String(err?.message || err), { status: 500 });
+  }
 }
-
