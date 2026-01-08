@@ -1,64 +1,100 @@
-export async function onRequestGet(context) {
-  const { request, env } = context;
-  const url = new URL(request.url);
-  
-  // 1. Get Code from Query Params
-  const code = url.searchParams.get('code');
-  
-  if (!code) {
-    return new Response('Missing "code" query parameter', { status: 400 });
-  }
+// functions/api/callback.js
 
-  // 2. Get Environment Variables
-  const client_id = env.GITHUB_CLIENT_ID;
-  const client_secret = env.GITHUB_CLIENT_SECRET;
-  
-  if (!client_id || !client_secret) {
-    return new Response('GitHub credentials not configured', { status: 500 });
+function renderBody(status, content) {
+  // This HTML runs inside the popup and talks to the CMS window
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head><title>Authentication ${status}</title></head>
+      <body>
+        <p>Authentication ${status}. You can close this window.</p>
+        <script>
+          (function () {
+            function receiveMessage(message) {
+              // Send token back to the admin window
+              window.opener.postMessage(
+                'authorization:github:${status}:'
+                  + ${JSON.stringify('')}.slice(0,0) // no-op to keep template simple
+                  + JSON.stringify(${/* placeholder, replaced below */'CONTENT_PLACEHOLDER'}),
+                message.origin
+              );
+              window.removeEventListener('message', receiveMessage, false);
+            }
+
+            window.addEventListener('message', receiveMessage, false);
+            // Start handshake with parent
+            window.opener.postMessage('authorizing:github', '*');
+          })();
+        </script>
+      </body>
+    </html>
+  `;
+
+  // Replace placeholder with real JSON at runtime
+  return html.replace(
+    '"CONTENT_PLACEHOLDER"',
+    JSON.stringify(content)
+  );
+}
+
+export async function onRequest(context) {
+  const { request, env } = context;
+  const clientId = env.GITHUB_CLIENT_ID;
+  const clientSecret = env.GITHUB_CLIENT_SECRET;
+
+  if (!clientId || !clientSecret) {
+    return new Response('GitHub client ID/secret not configured', { status: 500 });
   }
 
   try {
-    // 3. Exchange Code for Access Token
-    const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'User-Agent': 'Cloudflare-Pages-Auth',
-      },
-      body: JSON.stringify({
-        client_id,
-        client_secret,
-        code,
-      }),
-    });
+    const url = new URL(request.url);
+    const code = url.searchParams.get('code');
 
-    const tokenData = await tokenResponse.json();
-
-    if (tokenData.error) {
-       return new Response(JSON.stringify(tokenData), { 
-         status: 400, 
-         headers: { 'Content-Type': 'application/json' }
-       });
+    if (!code) {
+      return new Response('Missing "code" parameter', { status: 400 });
     }
-    
-    // 4. Return Token to Decap CMS
-    // Decap CMS expects: { "token": "ACCESS_TOKEN" }
-    // Some setups might need postMessage, but per requirements we return JSON.
-    const responseBody = JSON.stringify({ token: tokenData.access_token });
 
-    return new Response(responseBody, {
-      headers: {
-        'Content-Type': 'application/json',
-        // 'Access-Control-Allow-Origin': '*' // Add if cross-origin issues arise
+    const tokenResponse = await fetch(
+      'https://github.com/login/oauth/access_token',
+      {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+          'user-agent': 'cf-pages-decap-oauth',
+        },
+        body: JSON.stringify({
+          client_id: clientId,
+          client_secret: clientSecret,
+          code,
+        }),
       }
-    });
+    );
 
+    const result = await tokenResponse.json();
+
+    if (result.error) {
+      const body = renderBody('error', result);
+      return new Response(body, {
+        status: 401,
+        headers: { 'content-type': 'text/html;charset=UTF-8' },
+      });
+    }
+
+    const token = result.access_token;
+    const provider = 'github';
+
+    const body = renderBody('success', { token, provider });
+
+    return new Response(body, {
+      status: 200,
+      headers: { 'content-type': 'text/html;charset=UTF-8' },
+    });
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), { 
+    const body = renderBody('error', { message: String(error?.message || error) });
+    return new Response(body, {
       status: 500,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'content-type': 'text/html;charset=UTF-8' },
     });
   }
 }
-
