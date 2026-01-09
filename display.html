@@ -311,7 +311,7 @@
     <title>Receipt - ${escapeHtml(car.carName)}</title>
     <style>
         body {
-            background-color: #323333;
+            background-color: white;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
@@ -328,11 +328,11 @@
         .receipt-container {
             width: 100%;
             max-width: 800px;
-            background: linear-gradient(180deg, #D4B77B 0%, #8D7146 50%, #D4B77B 100%);
+            background: white;
             position: relative;
             padding: 30px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            color: #323333;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            color: #333;
         }
         .logo-img {
             max-height: 100px;
@@ -350,11 +350,11 @@
             font-size: 12px;
             font-weight: bold;
             margin-bottom: 20px;
-            color: #323333;
+            color: #333;
         }
         .section-title {
-            background-color: #333;
-            color: #D4B77B;
+            background-color: #2c5aa0;
+            color: white;
             padding: 8px 12px;
             font-size: 14px;
             font-weight: bold;
@@ -371,16 +371,16 @@
         .info-row {
             display: flex;
             flex-direction: column;
-            background: rgba(255,255,255,0.3);
-            border: 1px solid rgba(0,0,0,0.1);
+            background: transparent;
+            border: 1px solid #ccc;
         }
         .info-label {
             padding: 5px 10px;
             font-size: 11px;
             font-weight: bold;
-            color: #1a1a1a;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            background: rgba(255,255,255,0.4);
+            color: #333;
+            border-bottom: 1px solid #ccc;
+            background: #f5f5f5;
         }
         .info-value {
             padding: 8px 10px;
@@ -390,9 +390,9 @@
         }
         .total-section {
             margin-top: 20px;
-            border: 2px solid #333;
+            border: 2px solid #2c5aa0;
             padding: 15px;
-            background: rgba(255,255,255,0.2);
+            background: transparent;
         }
         .total-row {
             display: flex;
@@ -414,24 +414,24 @@
             border-collapse: collapse;
             margin-top: 10px;
             font-size: 11px;
-            background: rgba(255,255,255,0.5);
+            background: transparent;
         }
         .details-table th {
-            background-color: #333;
-            color: #D4B77B;
+            background-color: #2c5aa0;
+            color: white;
             padding: 8px;
             text-align: left;
-            border: 1px solid #333;
+            border: 1px solid #2c5aa0;
         }
         .details-table td {
             padding: 8px;
-            border: 1px solid #666;
+            border: 1px solid #ccc;
             color: #000;
         }
         .signature-section {
             margin-top: 30px;
             padding-top: 20px;
-            border-top: 1px solid #333;
+            border-top: 1px solid #ccc;
         }
         .signature-img {
             max-height: 80px;
