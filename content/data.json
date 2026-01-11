@@ -72,6 +72,25 @@
       "arrivalPayment2Amount": "",
       "carTotalCost": 8265,
       "carName": "HONDA CIVIC 2025"
+    },
+    {
+      "notes": "تم دفع مبلغ الحواله 100 دولار (سياره كتاب شهداء)",
+      "arrivalDate": "2025-11-26",
+      "carOwnerName": "طه عبد الواحد",
+      "njoomShippingCost": 2500,
+      "purchaseCost": 18995,
+      "purchaseDate": "2025-11-26",
+      "arrivalOfPaymentType": 2,
+      "arrivalPayment1Date": "2025-11-26",
+      "arrivalPayment2Date": "2025-12-21",
+      "totalCostOfShipping": 0,
+      "shippingCostPaymentDate": "2026-01-11",
+      "vin": "KMTG54SE4SU158256",
+      "id": "004",
+      "shippingCost": 0,
+      "arrivalPayment1Amount": 18900,
+      "arrivalPayment2Amount": 100,
+      "carName": " GENESIS G70"
     }
   ]
 }
