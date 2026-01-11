@@ -38,6 +38,22 @@
       "carName": "HONDA CR-V SPORT-L (HYBRID) 2024"
     },
     {
+      "arrivalDate": "2026-01-20",
+      "carOwnerName": "علي ليث سلمان ",
+      "njoomShippingCost": 2500,
+      "purchaseCost": 26200,
+      "purchaseDate": "2025-10-30",
+      "arrivalOfPaymentType": 1,
+      "arrivalPayment1Date": "2025-11-01",
+      "totalCostOfShipping": 2498,
+      "shippingCostPaymentDate": "2026-01-11",
+      "vin": "1C4RJYB65RC712892",
+      "id": "003",
+      "shippingCost": 0,
+      "arrivalPayment1Amount": 26200,
+      "carName": "JEEP 4XE"
+    },
+    {
       "notes": "تم دفع من مبلغ السيارة 8200 وباقي 65 دولار \nتم تحويل وجهة السيارة الى جبل علي بسبب قانون الكمرك\nحواله السيارة 100 دولار ",
       "arrivalDate": "2026-03-24",
       "carOwnerName": "علي ليث سلمان ",
@@ -56,22 +72,6 @@
       "arrivalPayment2Amount": "",
       "carTotalCost": 8265,
       "carName": "HONDA CIVIC 2025"
-    },
-    {
-      "arrivalDate": "2026-01-20",
-      "carOwnerName": "علي ليث سلمان ",
-      "njoomShippingCost": 2500,
-      "purchaseCost": 26200,
-      "purchaseDate": "2025-10-30",
-      "arrivalOfPaymentType": 1,
-      "arrivalPayment1Date": "2025-11-01",
-      "totalCostOfShipping": 2498,
-      "shippingCostPaymentDate": "2026-01-11",
-      "vin": "1C4RJYB65RC712892",
-      "id": "003",
-      "shippingCost": 0,
-      "arrivalPayment1Amount": 26200,
-      "carName": "JEEP 4XE"
     }
   ]
 }
