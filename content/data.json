@@ -82,10 +82,10 @@
       "arrivalOfPaymentType": 1,
       "arrivalPayment1Date": "2025-12-02",
       "totalCostOfShipping": 0,
-      "shippingCostPaymentDate": "2026-01-11",
+      "shippingCostPaymentDate": "2026-01-13",
       "vin": "JTME6RFV6SD579714",
       "id": "005",
-      "shippingCost": 0,
+      "shippingCost": 2000,
       "arrivalPayment1Amount": 23610,
       "arrivalPayment2Amount": "",
       "carName": "TOYOTA RAV4 XSE"
