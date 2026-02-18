@@ -100,11 +100,11 @@
       "purchaseDate": "2025-12-04",
       "arrivalOfPaymentType": 1,
       "arrivalPayment1Date": "2025-12-06",
-      "totalCostOfShipping": 2100,
+      "totalCostOfShipping": 2850,
       "shippingCostPaymentDate": "2026-01-11",
       "vin": "1GCPKDEK1SZ253675",
       "id": "006",
-      "shippingCost": 0,
+      "shippingCost": 2099,
       "arrivalPayment1Amount": 16100,
       "carTotalCost": 2850,
       "carName": "CHEVROLET SILVERADO"
