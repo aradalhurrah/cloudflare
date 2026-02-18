@@ -95,7 +95,7 @@
       "notes": "تم استلام 140 الف عراقي عن حواله السيارة \nتم استلام مبلغ النقل 2800 +75الف عراقي \nتم تسليم ليث 100دولار",
       "arrivalDate": "2026-02-15",
       "carOwnerName": "المستشار القانوني ليث ",
-      "njoomShippingCost": 2850,
+      "njoomShippingCost": "",
       "purchaseCost": 16100,
       "purchaseDate": "2025-12-04",
       "arrivalOfPaymentType": 1,
@@ -104,7 +104,7 @@
       "shippingCostPaymentDate": "2026-01-11",
       "vin": "1GCPKDEK1SZ253675",
       "id": "006",
-      "shippingCost": 2099,
+      "shippingCost": 2100,
       "arrivalPayment1Amount": 16100,
       "carTotalCost": 2850,
       "carName": "CHEVROLET SILVERADO"
